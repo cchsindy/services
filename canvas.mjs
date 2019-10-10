@@ -12,9 +12,10 @@ class CanvasService {
       // console.log('statusCode:', res.statusCode)
       // console.log('headers:', res.headers)
       res.on('data', (d) => {
-        const decoder = new StringDecoder('utf8')
-        const dataString = decoder.write(d)
-        this.data = JSON.parse(dataString)
+        // const decoder = new StringDecoder('utf8')
+        // const dataString = decoder.write(d)
+        // this.data = JSON.parse(dataString)
+        this.data = JSON.parse(d)
         console.log(this.data[0].name)
       })
     }).on('error', (e) => {
