@@ -20,7 +20,6 @@ class CanvasService {
         this.data = JSON.parse(Buffer.concat(chunks))
         console.log(this.data[0])
       })
-
     }).on('error', (e) => {
       console.error(e)
     })
