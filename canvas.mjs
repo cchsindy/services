@@ -1,5 +1,5 @@
 import CONFIGS from './configs.json'
-import { request } from './helpers.mjs'
+import { request, request2 } from './helpers.mjs'
 
 class CanvasService {
   constructor() {
@@ -15,6 +15,20 @@ class CanvasService {
       return data
     } catch(e) {
       console.log(e)
+    }
+  }
+
+  async getGrades2(userId) {
+    try {
+      const host = 'https://covenantchristian.instructure.com'
+      const options = {
+        ':path': `/api/v1/users/${userId}/courses`,
+        headers: { Authorization: CONFIGS.canvas.auth }
+      }
+      const data = await request2(host, options)
+      console.log(data)
+    } catch(e) {
+      console.error(e)
     }
   }
 }

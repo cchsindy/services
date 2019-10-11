@@ -1,3 +1,4 @@
+import http2 from 'http2'
 import https from 'https'
 
 export const request = async (url, options = {}) => {
@@ -12,4 +13,25 @@ export const request = async (url, options = {}) => {
     })
     req.end()
   })
+}
+
+export const request2 = async (host, options) => {
+  // return new Promise((resolve, reject) => {
+    try {
+      const client = http2.connect(host)
+      const req = client.request(options)
+      req.on('response', headers => {
+        console.log(headers[':status'])
+        console.log(headers['date'])
+      })
+      req.on('end', () => client.destroy())
+      req.on('error', err => {
+        console.error(err)
+        throw new Error('Error:', err)
+      })
+      req.end()
+    } catch(e) {
+      console.error(e)
+    }
+  // })
 }
