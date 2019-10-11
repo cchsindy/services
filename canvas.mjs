@@ -3,7 +3,6 @@ import { request } from './helpers.mjs'
 
 class CanvasService {
   constructor() {
-    this.data = []
   }
 
   async getGrades(userId) {
@@ -17,10 +16,6 @@ class CanvasService {
     } catch(e) {
       console.log(e)
     }
-  }
-
-  test() {
-    console.log('your base url is', CONFIGS.canvas.baseUrl)
   }
 }
 
