@@ -27,7 +27,7 @@ export const request2 = async (host, options) => {
       req.on('end', () => client.destroy())
       req.on('error', err => {
         console.error(err)
-        throw new Error('Error:', err)
+        throw new Error(err)
       })
       req.end()
     } catch(e) {
