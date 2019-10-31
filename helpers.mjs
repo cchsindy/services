@@ -16,7 +16,6 @@ export const request = async (url, options = {}) => {
 }
 
 export const request2 = async (host, options) => {
-  // return new Promise((resolve, reject) => {
     try {
       const client = http2.connect(host)
       const req = client.request(options)
@@ -33,5 +32,4 @@ export const request2 = async (host, options) => {
     } catch(e) {
       console.error(e)
     }
-  // })
 }
