@@ -17,5 +17,7 @@
     "url": "https://github.com/cchsindy/services/issues"
   },
   "homepage": "https://github.com/cchsindy/services#readme",
-  "dependencies": {}
+  "dependencies": {
+    "sparkpost": "^2.1.4"
+  }
 }
