@@ -1,7 +1,7 @@
 import http2 from 'http2'
 import https from 'https'
 
-export const request = async (url, options = {}) => {
+export const request = async (url, options = {}, type = 'json') => {
   return new Promise((resolve, reject) => {
     const req = https.request(url, options, res => {
       if (res.statusCode < 200 || res.statusCode >= 300) {
@@ -9,7 +9,16 @@ export const request = async (url, options = {}) => {
       }
       const data = []
       res.on('data', chunk => data.push(chunk))
-      res.on('end', () => resolve(JSON.parse(Buffer.concat(data))))
+      res.on('end', () => {
+        switch (type) {
+          case 'text':
+            resolve(Buffer.concat(data).toString())
+            break
+          default:
+            resolve(JSON.parse(Buffer.concat(data)))
+            break
+        }
+      })
     })
     req.end()
   })
