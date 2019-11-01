@@ -11,11 +11,10 @@ class SparkpostService {
       await this.sparky.transmissions
         .send({
           options: {
-            endpoint: 'https://dev.sparkpost.com:443',
-            sandbox: true
+            sandbox: false
           },
           content: {
-            from: 'testing@sparkpost.com',
+            from: 'noreply@covenant.education',
             subject,
             html,
             reply_to
