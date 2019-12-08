@@ -8,7 +8,7 @@ class SpacesService {
     try {
       const url = 'https://covenant.nyc3.digitaloceanspaces.com/'
       const data = await request(url, {}, 'text')
-      const files = Array.from(data.matchAll(RegExp('library-tv/[^<]*\.jpg', 'g')), m => m[0])
+      const files = Array.from(data.matchAll(RegExp(dir + '/[^<]*\.jpg', 'g')), m => m[0])
       return files
     } catch(e) {
       console.log(e)
