@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/cchsindy/services#readme",
   "dependencies": {
+    "firebase": "^7.5.2",
     "sparkpost": "^2.1.4"
   }
 }
