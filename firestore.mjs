@@ -3,11 +3,12 @@ import functions from 'firebase-functions'
 
 class FirestoreService {
   constructor() {
-    this.app = admin.initializeApp(functions.config().firebase)
+    try {
+      admin.initializeApp(functions.config().firebase)
+    } catch (err) {
+      console.log(err)
+    }
     this.store = admin.firestore()
-    // this.store.settings({
-    //   timestampsInSnapshots: true
-    // })
   }
 
   async getAnnouncements() {
