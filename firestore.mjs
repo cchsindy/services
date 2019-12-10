@@ -1,17 +1,16 @@
-import CONFIGS from 'data:application/json,"./configs.json"'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import admin from 'firebase-admin'
+import functions from 'firebase-functions'
 
 class FirestoreService {
   constructor() {
-    this.app = firebase.initializeApp(CONFIGS.firebase)
-    this.store = this.app.firestore()
-    this.store.settings({
-      timestampsInSnapshots: true
-    })
+    this.app = admin.initializeApp(functions.config().firebase)
+    this.store = admin.firestore()
+    // this.store.settings({
+    //   timestampsInSnapshots: true
+    // })
   }
 
-  getAnnouncements() {
+  async getAnnouncements() {
     const ref = this.store.collection('tv').doc('announcement')
     ref.get().then(doc => {
       return doc.data().announcements
