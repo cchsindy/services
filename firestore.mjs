@@ -1,10 +1,10 @@
+import CONFIGS from 'data:application/json,"./configs.json"'
 import admin from 'firebase-admin'
-import functions from 'firebase-functions'
 
 class FirestoreService {
   constructor() {
     try {
-      admin.initializeApp(functions.config().firebase)
+      admin.initializeApp(CONFIGS.firebase)
     } catch (err) {
       console.log(err)
     }
