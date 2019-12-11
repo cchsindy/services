@@ -61,10 +61,4 @@ typings/
 .next
 
 #configs
-configs.json
-
-#firebase
-.firebaserc
-firebase.json
-firestore.indexes.json
-firestore.rules
+configs.mjs

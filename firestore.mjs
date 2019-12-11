@@ -1,21 +1,30 @@
-import CONFIGS from 'data:application/json,"./configs.json"'
+import CONFIGS from './configs.mjs'
 import admin from 'firebase-admin'
 
 class FirestoreService {
   constructor() {
     try {
-      admin.initializeApp(CONFIGS.firebase)
-    } catch (err) {
-      console.log(err)
+      if (!admin.apps.length) {
+        admin.initializeApp({
+          credential: admin.credential.cert(CONFIGS.firebase),
+          databaseURL: "https://my-covenant.firebaseio.com"
+        })
+      }
+    } catch (e) {
+      console.log(e)
     }
     this.store = admin.firestore()
   }
 
   async getAnnouncements() {
-    const ref = this.store.collection('tv').doc('announcement')
-    ref.get().then(doc => {
+    try {
+      const ref = this.store.collection('tv').doc('announcement')
+      const doc = await ref.get()
       return doc.data().announcements
-    })
+    } catch (e) {
+      console.log(e)
+      return null
+    }
   }
 }
 

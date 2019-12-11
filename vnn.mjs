@@ -1,4 +1,4 @@
-import CONFIGS from 'data:application/json,"./configs.json"'
+import CONFIGS from './configs.mjs'
 import { request } from './helpers.mjs'
 
 class VNNService {
