@@ -31,15 +31,10 @@ class FirestoreService {
     try {
       let data = []
       const ref = this.store.collection('closet_temps')
-      ref
-        .orderBy('date', 'desc')
-        .limit(168)
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            data.push(doc.data())
-          })
-        })
+      const snapshot = await ref.orderBy('date', 'desc').limit(168).get()
+      snapshot.forEach((doc) => {
+        data.push(doc.data())
+      })
       return data
     } catch (e) {
       console.log(e)
