@@ -7,7 +7,7 @@ class FirestoreService {
       if (!admin.apps.length) {
         admin.initializeApp({
           credential: admin.credential.cert(CONFIGS.firebase),
-          databaseURL: "https://my-covenant.firebaseio.com"
+          databaseURL: 'https://my-covenant.firebaseio.com',
         })
       }
     } catch (e) {
@@ -21,6 +21,26 @@ class FirestoreService {
       const ref = this.store.collection('tv').doc('announcement')
       const doc = await ref.get()
       return doc.data().announcements
+    } catch (e) {
+      console.log(e)
+      return null
+    }
+  }
+
+  async getClosetData() {
+    try {
+      let data = []
+      const ref = this.store.collection('closet_temps')
+      ref
+        .orderBy('date', 'desc')
+        .limit(168)
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            data.push(doc.data())
+          })
+        })
+      return data
     } catch (e) {
       console.log(e)
       return null
