@@ -1,17 +1,30 @@
-import { request } from './helpers.mjs'
+import AWS from 'aws-sdk'
+import configs from './configs.mjs'
 
 class SpacesService {
-  constructor() {}
+  constructor() {
+    this.endpoint = new AWS.Endpoint('nyc3.digitaloceanspaces.com')
+    this.s3 = new AWS.S3({
+      endpoint: this.endpoint,
+      accessKeyId: configs.aws.key,
+      secretAccessKey: configs.aws.secret,
+    })
+  }
 
   async getFileList(dir) {
-    // switch to AWS SDK instead
     try {
-      const url = 'https://covenant.nyc3.digitaloceanspaces.com/'
-      const data = await request(url, {}, 'text')
-      const files = Array.from(
-        data.matchAll(RegExp(dir.concat('/[^<]*.jpg'), 'g')),
-        (m) => m[0]
-      )
+      const files = []
+      const data = await this.s3
+        .listObjectsV2({
+          Bucket: 'covenant',
+          Prefix: dir,
+        })
+        .promise()
+      if (data.Contents) {
+        data.Contents.forEach((item) => {
+          files.push(item.Key)
+        })
+      }
       return files
     } catch (e) {
       console.log(e)
