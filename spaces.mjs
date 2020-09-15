@@ -22,7 +22,7 @@ class SpacesService {
         .promise()
       if (data.Contents) {
         data.Contents.forEach((item) => {
-          files.push(item.Key)
+          if (item.Key !== `${dir}/`) files.push(item.Key)
         })
       }
       return files
