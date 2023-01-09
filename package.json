@@ -19,7 +19,7 @@
   "homepage": "https://github.com/cchsindy/services#readme",
   "dependencies": {
     "aws-sdk": "^2.899.0",
-    "firebase-admin": "^9.7.0",
+    "firebase-admin": "^11.4.1",
     "sparkpost": "^2.1.4"
   }
 }
